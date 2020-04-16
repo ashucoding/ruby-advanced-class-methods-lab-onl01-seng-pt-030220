@@ -34,20 +34,22 @@ def self.create_by_name (song_name)
     self.all.sort_by { |x| x.name}
   end 
 
-def self.new_from_filename(mp3_formatted_file)
-    create = self.new 
-    create.name = mp3_formatted_file.split(/[^a-zA-Z\s]|\s-\s/)[1] 
-    create.artist_name = mp3_formatted_file.split(/[^a-zA-Z\s]|\s-\s/)[0]
-    create
-  end 
-  
-   def self.create_from_filename(mp3_formatted_file)
-    c = self.new 
-    c.name = mp3_formatted_file.split(/[^a-zA-Z\s]|\s-\s/)[1] 
-    c.artist_name = mp3_formatted_file.split(/[^a-zA-Z\s]|\s-\s/)[0]
-    c.save
-    c
-end 
+def self.new_from_filename(string_to_manipulate)
+    parts = string_to_manipulate.split(" - ")
+    artist = parts[0]
+    song_name = parts[1].gsub(".mp3", "")
+
+    song = self.create
+    song.artist_name = artist
+    song.name = song_name
+    song
+  end
+
+  def self.create_from_filename(string_to_manipulate)
+    song = new_from_filename(string_to_manipulate)
+    song.save
+    song
+  end
 
   def self.destroy_all
     self.all.clear
