@@ -22,12 +22,12 @@ def self.create_by_name (song_name)
     song
   end
   
- def self.find_by_name(this_name)
-    Song.all.find {|a_song| a_song.name == this_name}
+ def self.find_by_name(song_name)
+    Song.all.find {|a_song| a_song.name == song_name}
   end
 
-  def self.find_or_create_by_name(this_name)
-    find_by_name(this_name) || create_by_name(this_name)
+  def self.find_or_create_by_name(this_song)
+    find_by_name(this_song) || create_by_name(this_song)
   end
     
   def self.alphabetical
@@ -45,8 +45,8 @@ def self.new_from_filename(song_name)
     song
   end
 
-  def self.create_from_filename(string_to_manipulate)
-    song = new_from_filename(string_to_manipulate)
+  def self.create_from_filename(song_name)
+    song = new_from_filename(song_name)
     song.save
     song
   end
