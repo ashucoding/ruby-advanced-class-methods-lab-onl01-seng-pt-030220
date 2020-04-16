@@ -34,8 +34,8 @@ def self.create_by_name (song_name)
     self.all.sort_by { |x| x.name}
   end 
 
-def self.new_from_filename(string_to_manipulate)
-    parts = string_to_manipulate.split(" - ")
+def self.new_from_filename(song_name)
+    parts = song_name.split(" - ")
     artist = parts[0]
     song_name = parts[1].gsub(".mp3", "")
 
