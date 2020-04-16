@@ -22,20 +22,12 @@ def self.create_by_name (song_name)
     song
   end
   
-  def self.find_by_name (song_name)
-   self.all.detect {|i| i.name == song_name}
+ def self.find_by_name(this_name)
+    Song.all.find {|a_song| a_song.name == this_name}
   end
-  
-  def self.find_or_create_by_name(play_this_song)
-    alexa_find_it = self.all.detect {|x| x.name == play_this_song}
-    if alexa_find_it == nil
-      song = self.new 
-      song.name = play_this_song
-      song.save 
-      song
-    else
-      alexa_find_it
-    end
+
+  def self.find_or_create_by_name(this_name)
+    find_by_name(this_name) || create_by_name(this_name)
   end
     
   def self.alphabetical
